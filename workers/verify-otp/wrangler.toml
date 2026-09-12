@@ -1,0 +1,25 @@
+# Example configuration for the OTP verification worker.
+#
+# Replace the route patterns with your own domain and create your own KV
+# namespace (`wrangler kv namespace create OTP_STORE`), then deploy with
+# `wrangler deploy` from this directory. The site reads the endpoint from
+# NEXT_PUBLIC_VERIFY_WORKER_URL (or verifyWorkerUrl in content/site.ts).
+
+name = "verify-otp"
+main = "src/index.ts"
+compatibility_date = "2025-05-12"
+
+[[routes]]
+pattern = "your-archive.example.org/api/verify-otp*"
+zone_name = "example.org"
+
+[[kv_namespaces]]
+binding = "OTP_STORE"
+id = "<your-kv-namespace-id>"
+preview_id = "<your-kv-namespace-id>"
+
+[vars]
+BASEROW_API_URL = "https://api.baserow.io"
+ALLOWED_ORIGINS = "https://your-archive.example.org"
+EMAIL_FROM = "Your Archive <hello@your-archive.example.org>"
+SITE_NAME = "Your Archive"

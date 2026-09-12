@@ -1,0 +1,44 @@
+{
+  "name": "echoes-from-afar",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "eslint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "node --test",
+    "bootstrap:baserow": "node scripts/bootstrap-baserow-schema.mjs",
+    "process:submissions": "node scripts/process-baserow-submissions.mjs",
+    "setup:baserow-form": "node scripts/setup-baserow-form.mjs",
+    "register:stories": "node scripts/register-existing-stories.mjs"
+  },
+  "dependencies": {
+    "@chenglou/pretext": "^0.0.9",
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
+    "gray-matter": "^4.0.3",
+    "next": "16.3.4",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^26",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/three": "^0.185.4",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.3.4",
+    "prettier": "^3.9.6",
+    "tailwindcss": "^4",
+    "three-stdlib": "^2.36.1",
+    "typescript": "^6.0.3"
+  },
+  "license": "MIT"
+}

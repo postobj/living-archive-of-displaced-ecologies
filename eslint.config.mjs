@@ -1,0 +1,20 @@
+import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
+import nextTypescript from "eslint-config-next/typescript";
+
+const eslintConfig = [
+  ...nextCoreWebVitals,
+  ...nextTypescript,
+  {
+    ignores: [
+      "node_modules/**",
+      ".next/**",
+      ".open-next/**",
+      "out/**",
+      "build/**",
+      "next-env.d.ts",
+      "examples/**",
+    ],
+  },
+];
+
+export default eslintConfig;

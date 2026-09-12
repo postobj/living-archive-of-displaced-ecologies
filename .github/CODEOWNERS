@@ -1,0 +1,13 @@
+# CODEOWNERS — automatically requests reviews from these owners when
+# matching files are changed in a pull request.
+#
+# This replaces the retired `reviewers` field in dependabot.yml.
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Dependabot PRs for npm dependencies
+package.json @HotThoughts
+package-lock.json @HotThoughts
+
+# Dependabot PRs for GitHub Actions
+/.github/workflows/ @HotThoughts
+/.github/dependabot.yml @HotThoughts

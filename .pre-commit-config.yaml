@@ -1,0 +1,46 @@
+default_stages: [pre-commit]
+
+repos:
+  - repo: "https://github.com/pre-commit/pre-commit-hooks"
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+        args: ["--maxkb=1024"]
+
+      - id: check-case-conflict
+
+      - id: check-merge-conflict
+
+      - id: detect-private-key
+
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+
+      - id: trailing-whitespace
+
+      - id: end-of-file-fixer
+
+      - id: check-json
+
+      - id: check-yaml
+
+  - repo: local
+    hooks:
+      - id: eslint
+        name: eslint
+        entry: npm run lint --
+        language: system
+        files: \.(js|jsx|ts|tsx)$
+
+      - id: prettier
+        name: prettier
+        entry: npx prettier --write
+        language: system
+        files: \.(js|jsx|ts|tsx|css|scss|json|md|mdx|yml|yaml|html)$
+
+      - id: test
+        name: test
+        entry: npm test
+        language: system
+        pass_filenames: false
+        always_run: true

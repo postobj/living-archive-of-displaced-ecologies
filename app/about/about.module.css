@@ -1,0 +1,471 @@
+.aboutPage {
+  --about-paper: #fffdf9;
+  --about-ink: rgba(19, 17, 15, 0.96);
+  --about-ink-soft: rgba(19, 17, 15, 0.68);
+  --about-outline: rgba(26, 23, 21, 0.82);
+  --about-hairline: rgba(26, 23, 21, 0.24);
+  --about-curve: rgba(29, 25, 24, 0.88);
+  --about-accent: #e10600;
+  --about-marker-muted: rgba(197, 193, 186, 0.96);
+  --about-marker-muted-shadow: rgba(122, 114, 107, 0.2);
+  --about-stack-width: min(100%, 40rem);
+  position: relative;
+  min-height: 100dvh;
+  background: #ffffff;
+  color: var(--about-ink);
+}
+
+.aboutBackButton {
+  opacity: 0.84;
+}
+
+.canvas {
+  position: relative;
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: min(100%, 118rem);
+  padding-top: max(env(safe-area-inset-top), 0.8rem);
+  padding-right: clamp(1rem, 2.2vw, 2.4rem);
+  padding-bottom: clamp(2.4rem, 4vw, 4.5rem);
+  padding-left: clamp(1rem, 2.2vw, 2.4rem);
+}
+
+.contentLayer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100dvh;
+}
+
+.aboutGlassSourceCanvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ghostHeading {
+  margin: 0;
+  font-family: var(--font-suwannaphum), "Times New Roman", serif;
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: -0.018em;
+  color: rgba(255, 255, 255, 0.01);
+  -webkit-text-stroke: 1px var(--about-outline);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.84);
+}
+
+.ghostHeading {
+  font-size: clamp(2.6rem, 3.5vw, 3.8rem);
+}
+
+.storyColumn,
+.contactColumn {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.storyColumn {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(
+    100dvh - max(env(safe-area-inset-top), 0.8rem) - clamp(2.4rem, 4vw, 4.5rem)
+  );
+  padding-top: clamp(2.4rem, 4.2vw, 3.8rem);
+}
+
+.contactColumn {
+  max-width: var(--about-stack-width);
+  padding-top: clamp(4rem, 8vw, 6rem);
+  padding-bottom: clamp(4rem, 8vw, 6rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: clamp(0.72rem, 1.2vw, 0.96rem);
+  margin-bottom: clamp(1.2rem, 1.9vw, 1.7rem);
+}
+
+.storyBody {
+  position: relative;
+  width: 100%;
+}
+
+.storyNarrative {
+  font-size: clamp(1.02rem, 1.33vw, 1.52rem);
+  line-height: 1.84;
+  text-align: justify;
+  color: var(--about-ink);
+}
+
+.storyScroll {
+  flex: 1;
+  width: 100%;
+  padding-right: calc(111px + 1.24rem - clamp(1rem, 2.2vw, 2.4rem));
+  padding-left: calc(111px + 1.24rem - clamp(1rem, 2.2vw, 2.4rem));
+}
+
+.storyNarrative p {
+  margin: 0;
+}
+
+.storyNarrative p + p {
+  margin-top: clamp(0.95rem, 1.65vw, 1.35rem);
+}
+
+.inlineAccent,
+.driftingCompassAccent {
+  font-family: var(--font-segment-stack);
+  font-size: 0.94em;
+  letter-spacing: 0.02em;
+}
+
+.lensAnchorInline {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.driftingCompassAccent {
+  white-space: nowrap;
+  letter-spacing: 0.045em;
+}
+
+.storyEffectsLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.textEffect {
+  --lens-scale: 1.13;
+  position: absolute;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: rgba(255, 255, 255, 0.1);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.08));
+  transition:
+    opacity 180ms ease,
+    visibility 0s linear 180ms;
+}
+
+.textEffectEchoes {
+  background-image: url("/about/ellipse-9.svg");
+  -webkit-mask: url("/about/ellipse-9-mask.svg") center / 100% 100% no-repeat;
+  mask: url("/about/ellipse-9-mask.svg") center / 100% 100% no-repeat;
+}
+
+.textEffectOrientation {
+  background-image: url("/about/ellipse-15.svg");
+  -webkit-mask: url("/about/ellipse-15-mask.svg") center / 100% 100% no-repeat;
+  mask: url("/about/ellipse-15-mask.svg") center / 100% 100% no-repeat;
+}
+
+.storyLensContent {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.storyLensViewport {
+  position: absolute;
+  left: calc(
+    (var(--lens-width) * (1 - var(--lens-scale)) / 2) -
+      (var(--lens-left) * var(--lens-scale))
+  );
+  top: calc(
+    (var(--lens-height) * (1 - var(--lens-scale)) / 2) -
+      (var(--lens-top) * var(--lens-scale))
+  );
+  width: min(40rem, calc(100vw - 2rem));
+  transform: scale(var(--lens-scale));
+  transform-origin: top left;
+}
+
+.storyLensViewport .storyNarrative {
+  width: min(40rem, calc(100vw - 2rem));
+  color: var(--about-ink);
+  text-shadow: 0 0 0.01px rgba(24, 21, 19, 0.16);
+}
+
+.textEffectTop {
+  --lens-left: clamp(1.15rem, 2.4vw, 2rem);
+  --lens-top: clamp(8.1rem, 10vw, 9.7rem);
+  --lens-width: clamp(8.9rem, 11.3vw, 10.6rem);
+  --lens-height: clamp(2.45rem, 2.75vw, 2.7rem);
+  background-color: rgba(255, 255, 255, 0.035);
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.03));
+  left: var(--lens-left);
+  top: var(--lens-top);
+  width: var(--lens-width);
+  height: var(--lens-height);
+}
+
+.textEffectBottom {
+  --lens-left: clamp(1.1rem, 2.3vw, 1.95rem);
+  --lens-top: clamp(17rem, 22vw, 20.1rem);
+  --lens-width: clamp(12.6rem, 15.2vw, 15rem);
+  --lens-height: clamp(2.8rem, 3.3vw, 3.2rem);
+  left: var(--lens-left);
+  top: var(--lens-top);
+  width: var(--lens-width);
+  height: var(--lens-height);
+}
+
+.creditBlock {
+  margin-top: clamp(2.3rem, 4vw, 3.1rem);
+  font-size: clamp(0.88rem, 1vw, 1.05rem);
+  line-height: 1.72;
+  text-align: left;
+}
+
+.creditLink {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.16em;
+  text-decoration-color: rgba(19, 17, 15, 0.26);
+  transition:
+    color 180ms ease,
+    text-decoration-color 180ms ease;
+}
+
+.creditLink:hover,
+.creditLink:focus-visible {
+  color: var(--about-accent);
+  text-decoration-color: color-mix(
+    in srgb,
+    var(--about-accent) 60%,
+    transparent
+  );
+}
+
+.creditLink:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--about-accent) 66%, transparent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.contactForm {
+  display: grid;
+  gap: 1rem;
+  width: min(100%, 35.5rem);
+  margin-top: clamp(2rem, 4vh, 2.6rem);
+  margin-bottom: 0;
+}
+
+.contactField {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.contactLabel {
+  font-family: var(--font-segment-stack);
+  font-size: 1.2rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(19, 17, 15, 0.52);
+}
+
+.contactInput,
+.contactTextarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--about-hairline);
+  border-radius: 0;
+  background: transparent;
+  padding: 0.5rem 0;
+  color: var(--about-ink);
+  font: inherit;
+  font-size: 1.18rem;
+  line-height: 1.56;
+  resize: vertical;
+}
+
+.contactTextarea {
+  min-height: clamp(8.5rem, 20vh, 10rem);
+}
+
+.contactInput::placeholder,
+.contactTextarea::placeholder {
+  color: rgba(19, 17, 15, 0.38);
+}
+
+.contactInput:focus-visible,
+.contactTextarea:focus-visible {
+  outline: none;
+  border-bottom-color: color-mix(in srgb, var(--about-accent) 54%, transparent);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--about-accent) 32%, transparent);
+}
+
+.contactSubmit {
+  justify-self: center;
+  margin-top: 0.35rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--about-ink);
+  font-family: var(--font-segment-stack);
+  font-size: 1.3rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: color 160ms ease;
+}
+
+.contactSubmit:hover,
+.contactSubmit:focus-visible {
+  color: var(--about-accent);
+}
+
+.contactSubmit:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--about-accent) 62%, transparent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.contactSubmit:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+}
+
+.contactIntro {
+  margin: 1.2rem 0 0;
+  font-size: 0.96rem;
+  line-height: 1.7;
+  text-align: center;
+  color: var(--about-ink);
+}
+
+.contactInstagramLink {
+  display: inline;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    color 180ms ease,
+    opacity 180ms ease;
+}
+
+.contactInstagramLink:hover,
+.contactInstagramLink:focus-visible {
+  color: var(--about-accent);
+}
+
+.contactInstagramLink:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--about-accent) 62%, transparent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.contactInstagramIcon {
+  display: inline;
+  width: 16px;
+  height: 16px;
+  margin-right: 0.28rem;
+  vertical-align: middle;
+  position: relative;
+  top: -0.06em;
+  opacity: 0.72;
+}
+
+.contactInstagramLink:hover .contactInstagramIcon,
+.contactInstagramLink:focus-visible .contactInstagramIcon {
+  opacity: 1;
+}
+
+@media (max-width: 1180px) {
+  .storyNarrative {
+    font-size: clamp(0.96rem, 1.2vw, 1.24rem);
+  }
+
+  .textEffectTop {
+    --lens-left: clamp(1rem, 2vw, 1.6rem);
+    --lens-top: clamp(7.8rem, 11vw, 9rem);
+    --lens-width: clamp(8.6rem, 11vw, 10rem);
+    --lens-height: clamp(2.3rem, 2.6vw, 2.5rem);
+  }
+
+  .textEffectBottom {
+    --lens-left: clamp(1rem, 2vw, 1.5rem);
+    --lens-top: clamp(16rem, 21vw, 18.2rem);
+    --lens-width: clamp(11.6rem, 14.8vw, 13.8rem);
+  }
+}
+
+@media (max-width: 920px) {
+  .canvas {
+    padding-top: max(env(safe-area-inset-top), 3.2rem);
+  }
+
+  .storyColumn {
+    min-height: auto;
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .canvas {
+    padding-right: 0.9rem;
+    padding-left: 0.9rem;
+  }
+
+  .sectionHeader {
+    gap: 0.72rem;
+    margin-bottom: 1rem;
+  }
+
+  .ghostHeading {
+    font-size: clamp(2.24rem, 10.4vw, 2.9rem);
+  }
+
+  .storyScroll {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .storyNarrative {
+    font-size: 0.96rem;
+    line-height: 1.74;
+    text-align: left;
+  }
+
+  .storyNarrative p + p {
+    margin-top: 1rem;
+  }
+
+  .contactColumn {
+    width: min(100%, 17.5rem);
+  }
+
+  .textEffectTop {
+    --lens-left: 0.8rem;
+    --lens-top: 7.9rem;
+    --lens-width: 8.35rem;
+    --lens-height: 2.4rem;
+  }
+
+  .textEffectBottom {
+    --lens-left: 0.8rem;
+    --lens-top: 15.2rem;
+    --lens-width: 10.2rem;
+    --lens-height: 2.45rem;
+  }
+}
